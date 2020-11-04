@@ -1,0 +1,9 @@
+npm init
+
+https://parceljs.org/getting_started.html
+
+npm install parcel@next -D
+
+https://www.npmjs.com/package/sass
+
+npm install sass@1.26.10 -D

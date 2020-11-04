@@ -1,0 +1,16 @@
+{
+  "name": "1_web_development_bootcamp_udemy_forkify",
+  "version": "1.0.0",
+  "description": "Forkify project",
+  "main": "index.html",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html"
+  },
+  "author": "Chu",
+  "license": "ISC",
+  "devDependencies": {
+    "parcel": "^2.0.0-beta.1",
+    "sass": "^1.26.10"
+  }
+}
