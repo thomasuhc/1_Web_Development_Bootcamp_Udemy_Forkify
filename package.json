@@ -10,7 +10,11 @@
   "author": "Chu",
   "license": "ISC",
   "devDependencies": {
-    "parcel": "^2.0.0-beta.1",
+    "parcel": "^2.0.0-nightly.438",
     "sass": "^1.26.10"
+  },
+  "dependencies": {
+    "core-js": "^3.6.5",
+    "regenerator-runtime": "^0.13.7"
   }
 }
