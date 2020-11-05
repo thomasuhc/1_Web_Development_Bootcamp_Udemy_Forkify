@@ -15,3 +15,7 @@ npm install core-js
 https://www.npmjs.com/package/regenerator-runtime
 
 npm install regenerator-runtime
+
+https://www.npmjs.com/package/fractional
+
+npm install fractional
