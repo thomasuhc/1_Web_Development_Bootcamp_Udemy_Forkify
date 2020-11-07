@@ -9,8 +9,6 @@ class ResultsView extends View {
 
     _generateMarkup() {
 
-        console.log(this.data)
-
         return this._data.map(this._generateMarkupPreview).join("");
     }
 
