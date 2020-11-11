@@ -1,23 +1,23 @@
-import View from "./view.js"
-import previewView from "./previewView.js"
-import icons from 'url:../../img/icons.svg';
+import View from "./view.js";
+import previewView from "./previewView.js";
+import icons from "url:../../img/icons.svg";
 
 class bookmarksView extends View {
+  _parentElement = document.querySelector(".bookmarks__list");
+  _erroMessage = "No bookmarks !!!";
+  _message = "";
 
-    _parentElement = document.querySelector(".bookmarks__list")
-    _erroMessage = "No bookmarks !!!";
-    _message = "";
+  addHandlerRender(handler) {
+    window.addEventListener("load", handler);
+  }
 
-    addHandlerRender(handler) {
-      window.addEventListener("load", handler);
-    }
+  _generateMarkup() {
+    return this._data
+      .map((bookmark) => previewView.render(bookmark, false))
+      .join("");
+  }
 
-    _generateMarkup() {
-
-        return this._data.map(bookmark => previewView.render(bookmark, false)).join("");
-    }
-
-/*     _generateMarkupPreview(result) {
+  /*     _generateMarkupPreview(result) {
 
       const id = window.location.hash.slice(1)
 

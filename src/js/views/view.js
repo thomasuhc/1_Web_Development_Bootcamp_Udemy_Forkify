@@ -1,66 +1,67 @@
-import { Array } from 'core-js';
-import icons from 'url:../../img/icons.svg';
+import { Array } from "core-js";
+import icons from "url:../../img/icons.svg";
 
 export default class View {
-    _data;
+  _data;
 
-    render(data, render = true) {
+  render(data, render = true) {
+    if (!data || (Array.isArray(data) && data.length == 0))
+      return this.renderError();
 
-        if(!data || (Array.isArray(data) && data.length == 0 )) return this.renderError();
+    this._data = data;
+    const markup = this._generateMarkup();
 
-        this._data = data;
-        const markup = this._generateMarkup();
+    if (!render) return markup;
 
-        if(!render) return markup;
-        
-        this._clear();
-        this._parentElement.insertAdjacentHTML("afterbegin", markup);
-    }
+    this._clear();
+    this._parentElement.insertAdjacentHTML("afterbegin", markup);
+  }
 
-    update(data) {
+  update(data) {
+    this._data = data;
+    const newMarkup = this._generateMarkup();
 
-      this._data = data;
-      const newMarkup = this._generateMarkup();
+    const newDOM = document.createRange().createContextualFragment(newMarkup);
 
-      const newDOM = document.createRange().createContextualFragment(newMarkup);
+    const newElements = Array.from(newDOM.querySelectorAll("*"));
+    const curElements = Array.from(this._parentElement.querySelectorAll("*"));
 
-      const newElements = Array.from(newDOM.querySelectorAll('*'));
-      const curElements = Array.from(this._parentElement.querySelectorAll("*"));
-   
+    newElements.forEach((newEl, i) => {
+      const curlEl = curElements[i];
+      //console.log(curlEl, newEl.isEqualNode(curlEl));
 
-      newElements.forEach((newEl, i) => {
-        const curlEl = curElements[i];
-        //console.log(curlEl, newEl.isEqualNode(curlEl));
+      if (
+        !newEl.isEqualNode(curlEl) &&
+        newEl.firstChild?.nodeValue.trim() !== ""
+      ) {
+        curlEl.textContent = newEl.textContent;
+      }
 
-        if(!newEl.isEqualNode(curlEl) && newEl.firstChild?.nodeValue.trim() !== "") {
-          curlEl.textContent = newEl.textContent;
-        }
+      if (!newEl.isEqualNode(curlEl))
+        Array.from(newEl.attributes).forEach((attr) =>
+          curlEl.setAttribute(attr.name, attr.value)
+        );
+    });
+  }
 
-        if(!newEl.isEqualNode(curlEl)) 
-          Array.from(newEl.attributes).forEach(attr => curlEl.setAttribute(attr.name, attr.value));
-        
-      });
-    }
+  _clear() {
+    this._parentElement.innerHTML = "";
+  }
 
-    _clear() {
-        this._parentElement.innerHTML = "";
-    }
-
-    renderSpinner = function() {
-        const markup = `
+  renderSpinner = function () {
+    const markup = `
             <div class="spinner">
             <svg>
               <use href="${icons}#icon-loader"></use>
             </svg>
           </div>
         `;
-        this._clear();
-        this._parentElement.insertAdjacentHTML("afterbegin", markup)
-      };
-      
+    this._clear();
+    this._parentElement.insertAdjacentHTML("afterbegin", markup);
+  };
 
-      renderError (message = this._erroMessage) {
-        const markup = `
+  renderError(message = this._erroMessage) {
+    const markup = `
         <div class="error">
         <div>
           <svg>
@@ -69,13 +70,13 @@ export default class View {
         </div>
         <p>${message}</p>
       </div>
-        `
-        this._clear();
-        this._parentElement.insertAdjacentHTML("afterbegin", markup)
-      }
+        `;
+    this._clear();
+    this._parentElement.insertAdjacentHTML("afterbegin", markup);
+  }
 
-      renderMessage (message = this._message) {
-        const markup = `
+  renderMessage(message = this._message) {
+    const markup = `
         <div class="message">
         <div>
           <svg>
@@ -84,9 +85,8 @@ export default class View {
         </div>
         <p>${message}</p>
       </div>
-        `
-        this._clear();
-        this._parentElement.insertAdjacentHTML("afterbegin", markup)
-      }
-    
+        `;
+    this._clear();
+    this._parentElement.insertAdjacentHTML("afterbegin", markup);
+  }
 }

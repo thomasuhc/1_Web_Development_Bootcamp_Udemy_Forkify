@@ -19,3 +19,25 @@ npm install regenerator-runtime
 https://www.npmjs.com/package/fractional
 
 npm install fractional
+
+//////////////////////////////////////////////////////////////////
+
+At the VS code
+
+press Ctrl+Shift+P
+
+then type Format Document With...
+
+At the end of the list click on Configure Default Formatter...
+
+Now you can choose your favorite beautifier from the list.
+
+//////////////////////////////////////////////////////////////////
+
+Code Formatting Shortcut:
+
+Visual Studio Code on Windows - Shift + Alt + F
+
+Visual Studio Code on MacOS - Shift + Option + F
+
+Visual Studio Code on Ubuntu - Ctrl + Shift + I
